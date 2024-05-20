@@ -9,7 +9,7 @@ internal class Program
         Inventory inventory = new Inventory();
         InitializeInventory(inventory);
 
-        Guitar whatErinLikes = new Guitar("", 0, "fender", "Stratocastor", "electric", "Alder", "Alder");
+        Guitar whatErinLikes = new Guitar("", 0, Builder.Fender, "Stratocastor", Type.Electric, Wood.Alder, Wood.Alder);
         Guitar guitar = inventory.Search(whatErinLikes);
         if (guitar != null)
         {
@@ -35,6 +35,6 @@ internal class Program
 
     private static void InitializeInventory(Inventory inventory)
     {
-        inventory.AddGuitar("V95693", 1499.95m, "Fender", "Stratocastor", "electric", "Alder", "Alder");
+        inventory.AddGuitar("V95693", 1499.95m, Builder.Fender, "Stratocastor", Type.Electric, Wood.Alder, Wood.Alder);
     }
 }

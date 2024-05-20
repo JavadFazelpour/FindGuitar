@@ -10,8 +10,8 @@ internal class Inventory
     }
 
     public void AddGuitar(string serialNumber, decimal price,
-                          string builder, string model,
-                          string type, string backWood, string topWood)
+                          Builder builder, string model,
+                          Type type, Wood backWood, Wood topWood)
     {
         Guitar guitar = new Guitar(serialNumber, price, builder,
                                    model, type, backWood, topWood);
@@ -30,32 +30,33 @@ internal class Inventory
         return null;
     }
 
-    public Guitar Search(Guitar searchGuitar)
+    public List<Guitar> Search(Guitar searchGuitar)
     {
+        List<Guitar> matchingGuitars = new();
+
         foreach (var guitar in guitars)
         {
-            string builder = searchGuitar.Builder.ToLower();
-            if (!string.IsNullOrWhiteSpace(builder) && builder!= guitar.Builder.ToLower())
+            Builder builder = searchGuitar.Builder;
+            if (builder != guitar.Builder)
                 continue;
 
             string model = searchGuitar.Model.ToLower();
             if (!string.IsNullOrWhiteSpace(model) && model != guitar.Model.ToLower())
                 continue;
 
-            string type = searchGuitar.Type.ToLower();
-            if (!string.IsNullOrWhiteSpace(type) && type != guitar.Type.ToLower())
+            Type type = searchGuitar.Type;
+            if (type != guitar.Type)
                 continue;
 
-            string backWood = searchGuitar.BackWood.ToLower();
-            if (!string.IsNullOrWhiteSpace(backWood) && backWood != guitar.BackWood.ToLower())
+            Wood backWood = searchGuitar.BackWood;
+            if (backWood != guitar.BackWood)
                 continue;
 
-            string topWood = searchGuitar.TopWood.ToLower();
-            if (!string.IsNullOrWhiteSpace(topWood) && topWood != guitar.TopWood.ToLower())
+            Wood topWood = searchGuitar.TopWood;
+            if (topWood != guitar.TopWood)
                 continue;
-
-            return guitar;
+            matchingGuitars.Add(guitar);
         }
-        return null;
+        return matchingGuitars;
     }
 }
