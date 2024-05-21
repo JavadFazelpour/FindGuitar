@@ -9,12 +9,10 @@ internal class Inventory
         guitars = new List<Guitar>();
     }
 
-    public void AddGuitar(string serialNumber, decimal price,
-                          Builder builder, string model,
-                          Type type, Wood backWood, Wood topWood)
+    public void AddGuitar(string serialNumber, decimal price, GuitarSpec guitarSpec)
     {
-        Guitar guitar = new Guitar(serialNumber, price, builder,
-                                   model, type, backWood, topWood);
+        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
+
         guitars.Add(guitar);
     }
 
@@ -30,30 +28,32 @@ internal class Inventory
         return null;
     }
 
-    public List<Guitar> Search(Guitar searchGuitar)
+    public List<Guitar> Search(GuitarSpec searchSpec)
     {
         List<Guitar> matchingGuitars = new();
 
         foreach (var guitar in guitars)
         {
-            Builder builder = searchGuitar.Builder;
-            if (builder != guitar.Builder)
+            GuitarSpec guitarSpec = guitar.Spec;
+
+            Builder builder = searchSpec.Builder;
+            if (builder != guitarSpec.Builder)
                 continue;
 
-            string model = searchGuitar.Model.ToLower();
-            if (!string.IsNullOrWhiteSpace(model) && model != guitar.Model.ToLower())
+            string model = searchSpec.Model.ToLower();
+            if (!string.IsNullOrWhiteSpace(model) && model != guitarSpec.Model.ToLower())
                 continue;
 
-            Type type = searchGuitar.Type;
-            if (type != guitar.Type)
+            Type type = searchSpec.Type;
+            if (type != guitarSpec.Type)
                 continue;
 
-            Wood backWood = searchGuitar.BackWood;
-            if (backWood != guitar.BackWood)
+            Wood backWood = searchSpec.BackWood;
+            if (backWood != guitarSpec.BackWood)
                 continue;
 
-            Wood topWood = searchGuitar.TopWood;
-            if (topWood != guitar.TopWood)
+            Wood topWood = searchSpec.TopWood;
+            if (topWood != guitarSpec.TopWood)
                 continue;
             matchingGuitars.Add(guitar);
         }

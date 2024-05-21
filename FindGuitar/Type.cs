@@ -1,6 +1,6 @@
 ﻿namespace FindGuitar;
 
-internal enum Type
+public enum Type
 {
     Acoustic,
     Electric,

@@ -1,6 +1,6 @@
 ﻿namespace FindGuitar;
 
-internal enum Wood
+public enum Wood
 {
     IndianRosewood, BrazilianRoseWood,
     Mahogany, Maple, Cocobolo, Cedar,
