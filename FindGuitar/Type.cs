@@ -1,4 +1,4 @@
-﻿namespace FindGuitar;
+﻿namespace FindMusicalInstruments;
 
 public enum Type
 {

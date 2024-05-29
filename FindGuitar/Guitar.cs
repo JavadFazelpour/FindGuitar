@@ -1,16 +1,8 @@
-﻿namespace FindGuitar;
+﻿namespace FindMusicalInstruments;
 
-internal class Guitar
+internal class Guitar : Instrument
 {
-    public string SerialNumber { get; private set; }
-    public decimal Price { get; set; }
-
-    public GuitarSpec Spec { get; private set; }
-
-    public Guitar(string serialNumber, decimal price, GuitarSpec guitarSpec)
+    public Guitar(string serialNumber, decimal price, InstrumentSpec spec) : base(serialNumber, price, spec)
     {
-        SerialNumber = serialNumber;
-        Price = price;
-        Spec = guitarSpec;
     }
 }

@@ -1,28 +1,34 @@
-﻿namespace FindGuitar;
+﻿namespace FindMusicalInstruments;
 
 internal class Inventory
 {
-    private List<Guitar> guitars;
+    private List<Instrument> inventory;
 
     public Inventory()
     {
-        guitars = new List<Guitar>();
+        inventory = new List<Instrument>();
     }
 
-    public void AddGuitar(string serialNumber, decimal price, GuitarSpec guitarSpec)
+    public void AddInstrument(string serialNumber, decimal price, InstrumentSpec spec)
     {
-        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
+        Instrument instrument = null;
+        
+        if (spec is GuitarSpec guitarSpec)
+            instrument = new Guitar(serialNumber, price, guitarSpec);
 
-        guitars.Add(guitar);
+        else if (spec is MandolinSpec mandolinSpec)
+            instrument = new Mandolin(serialNumber, price, mandolinSpec);
+
+        inventory.Add(instrument);
     }
 
-    public Guitar GetGuitar(string serialNumber)
+    public Instrument GetInstrument(string serialNumber)
     {
-        foreach (var guitar in guitars)
+        foreach (var instrument in inventory)
         {
-            if (guitar.SerialNumber == serialNumber)
+            if (instrument.SerialNumber == serialNumber)
             {
-                return guitar;
+                return instrument;
             }
         }
         return null;
@@ -32,31 +38,26 @@ internal class Inventory
     {
         List<Guitar> matchingGuitars = new();
 
-        foreach (var guitar in guitars)
+        foreach (var item in inventory)
         {
-            GuitarSpec guitarSpec = guitar.Spec;
+            if (item is not Guitar guitar) continue;
 
-            Builder builder = searchSpec.Builder;
-            if (builder != guitarSpec.Builder)
-                continue;
-
-            string model = searchSpec.Model.ToLower();
-            if (!string.IsNullOrWhiteSpace(model) && model != guitarSpec.Model.ToLower())
-                continue;
-
-            Type type = searchSpec.Type;
-            if (type != guitarSpec.Type)
-                continue;
-
-            Wood backWood = searchSpec.BackWood;
-            if (backWood != guitarSpec.BackWood)
-                continue;
-
-            Wood topWood = searchSpec.TopWood;
-            if (topWood != guitarSpec.TopWood)
-                continue;
-            matchingGuitars.Add(guitar);
+            if (guitar.Spec.Matches(searchSpec))
+                matchingGuitars.Add(guitar);
         }
         return matchingGuitars;
+    }
+    public List<Mandolin> Search(MandolinSpec searchSpec)
+    {
+        List<Mandolin> matchingMandolins = new();
+
+        foreach (var item in inventory)
+        {
+            if (item is not Mandolin mandolin) continue;
+
+            if (mandolin.Spec.Matches(searchSpec))
+                matchingMandolins.Add(mandolin);
+        }
+        return matchingMandolins;
     }
 }
