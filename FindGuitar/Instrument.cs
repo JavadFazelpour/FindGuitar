@@ -1,12 +1,13 @@
 ﻿namespace FindMusicalInstruments;
 
-public abstract class Instrument
+public class Instrument
 {
     public string SerialNumber { get; private set; }
     public decimal Price { get; private set; }
     public InstrumentSpec Spec { get; private set; }
 
-    protected Instrument(string serialNumber, decimal price, InstrumentSpec spec)
+
+    public Instrument(string serialNumber, decimal price, InstrumentSpec spec)
     {
         SerialNumber = serialNumber;
         Price = price;

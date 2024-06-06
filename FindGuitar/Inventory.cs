@@ -11,14 +11,7 @@ internal class Inventory
 
     public void AddInstrument(string serialNumber, decimal price, InstrumentSpec spec)
     {
-        Instrument instrument = null;
-        
-        if (spec is GuitarSpec guitarSpec)
-            instrument = new Guitar(serialNumber, price, guitarSpec);
-
-        else if (spec is MandolinSpec mandolinSpec)
-            instrument = new Mandolin(serialNumber, price, mandolinSpec);
-
+        Instrument instrument = new Instrument(serialNumber, price, spec);
         inventory.Add(instrument);
     }
 
@@ -34,30 +27,15 @@ internal class Inventory
         return null;
     }
 
-    public List<Guitar> Search(GuitarSpec searchSpec)
+    public List<Instrument> Search(InstrumentSpec searchSpec)
     {
-        List<Guitar> matchingGuitars = new();
+        List<Instrument> matchingInstruments = new();
 
-        foreach (var item in inventory)
+        foreach (var instrument in inventory)
         {
-            if (item is not Guitar guitar) continue;
-
-            if (guitar.Spec.Matches(searchSpec))
-                matchingGuitars.Add(guitar);
+            if (instrument.Spec.Matches(searchSpec))
+                matchingInstruments.Add(instrument);
         }
-        return matchingGuitars;
-    }
-    public List<Mandolin> Search(MandolinSpec searchSpec)
-    {
-        List<Mandolin> matchingMandolins = new();
-
-        foreach (var item in inventory)
-        {
-            if (item is not Mandolin mandolin) continue;
-
-            if (mandolin.Spec.Matches(searchSpec))
-                matchingMandolins.Add(mandolin);
-        }
-        return matchingMandolins;
+        return matchingInstruments;
     }
 }
