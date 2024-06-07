@@ -29,7 +29,7 @@ internal class Program
                     if (entry.Key == "instrumentType") continue;
                     Console.WriteLine("    " + entry.Key + ": " + entry.Value);
                 }
-                Console.WriteLine($"   You can have this {spec.Properties["instrumentType"]} for ${instrument.Price}");
+                Console.WriteLine($"   You can have this {spec.Properties["instrumentType"]} for ${instrument.Price}\n---");
             }
         }
         else
@@ -51,43 +51,74 @@ internal class Program
         };
         inventory.AddInstrument("11277", 3999.95m, new InstrumentSpec(properties));
 
-        properties = new(){
-            { "instrumentType", "Guitar" },
-            { "builder", "Martin" },
-            { "model", "D-18" },
-            { "type", "Acoustic" },
-            { "numStrings", "6" },
-            { "topWood", "Mahogany" },
-            { "backWood", "Adirondack" }
+        properties = new()
+        {
+            ["instrumentType"] = "Guitar",
+            ["builder"] = "Martin",
+            ["model"] = "D-18",
+            ["type"] = "Acoustic",
+            ["numStrings"] = "6",
+            ["topWood"] = "Mahogany",
+            ["backWood"] = "Adirondack"
         };
         inventory.AddInstrument("122784", 5495.95m, new InstrumentSpec(properties));
 
-        properties = new(){
-            { "instrumentType", "Guitar" },
-            { "builder", "Fender" },
-            { "model", "Stratocastor" },
-            { "type", "Electric" },
-            { "numStrings", "6" },
-            { "topWood", "Alder" },
-            { "backWood", "Alder" }
+        properties = new()
+        {
+            ["instrumentType"] = "Guitar",
+            ["builder"] = "Fender",
+            ["model"] = "Stratocastor",
+            ["type"] = "Electric",
+            ["numStrings"] = "6",
+            ["topWood"] = "Alder",
+            ["backWood"] = "Alder"
         };
         inventory.AddInstrument("V9512", 1549.95m, new InstrumentSpec(properties));
 
-        properties = new(){
-            { "instrumentType", "Guitar" },
-            { "builder", "Gibson" },
-            { "model", "Les Paul" },
-            { "type", "Electric" },
-            { "numStrings", "6" },
-            { "topWood", "Maple" },
-            { "backWood", "Maple" }
+        properties = new()
+        {
+            ["instrumentType"] = "Guitar",
+            ["builder"] = "Gibson",
+            ["model"] = "Les Paul",
+            ["type"] = "Electric",
+            ["numStrings"] = "6",
+            ["topWood"] = "Maple",
+            ["backWood"] = "Maple"
         };
         inventory.AddInstrument("70108276", 2295.95m, new InstrumentSpec(properties));
 
-        // inventory.AddInstrument("V95693", 1499.95m, new GuitarSpec(Builder.Fender, "Stratocastor", Type.Electric, 6, Wood.Alder, Wood.Alder));
-        // inventory.AddInstrument("82765501", 1890.95m, new GuitarSpec(Builder.Gibson, "SG'61", Type.Electric, 6, Wood.Mahogany, Wood.Mahogany));
+        properties = new()
+        {
+            ["instrumentType"] = "Guitar",
+            ["builder"] = "Gibson",
+            ["model"] = "SG `61 Reissue",
+            ["type"] = "Electric",
+            ["numStrings"] = "6",
+            ["topWood"] = "Mahogany",
+            ["backWood"] = "Mahogany"
+        };
+        inventory.AddInstrument("82765501", 1890.95m, new InstrumentSpec(properties));
 
-        // inventory.AddInstrument("9019920", 5495.99m, new MandolinSpec(Builder.Gibson, "F5-G", Type.Acoustic, Style.A, Wood.Maple, Wood.Maple));
+        properties = new()
+        {
+            ["instrumentType"] = "Mandolin",
+            ["builder"] = "Gibson",
+            ["model"] = "F-5G",
+            ["type"] = "Acoustic",
+            ["topWood"] = "Maple",
+            ["backWood"] = "Maple"
+        };
+        inventory.AddInstrument("9019920", 5495.99m, new InstrumentSpec(properties));
+
+        properties = new()
+        {
+            ["instrumentType"] = "Banjo",
+            ["builder"] = "Gibson",
+            ["model"] = "RB-3 Wreath",
+            ["numStrings"] = "5",
+            ["backWood"] = "Maple"
+        };
+        inventory.AddInstrument("9019920", 2945.95m, new InstrumentSpec(properties));
 
     }
 }
